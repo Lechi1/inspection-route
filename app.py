@@ -2,11 +2,18 @@ from flask import Flask, request, jsonify
 import pandas as pd
 from methods.nsga2 import run_nsga2
 
+from flask import Flask, render_template
+from flask_ngrok import run_with_ngrok
+
 app = Flask(__name__)
+run_with_ngrok(app)  # Tambahkan ngrok ke aplikasi Flask
 
 @app.route("/")
 def home():
-    return "Selamat datang di demo Optimasi Rute Inspeksi dengan NSGA-II!"
+    return render_template("index.html")
+
+if __name__ == "__main__":
+    app.run()
 
 # Fungsi untuk load data pelanggan
 def load_customer_data(file):
